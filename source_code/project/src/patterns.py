@@ -1,4 +1,7 @@
 # coding=utf-8
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 framework_plattforms = ['Docker', 'OSP', 'Premiere', 'directAdmin', 'typography', 'Prometheus', 'visual weight', 'Kubernetes', 'JDBC', 'UnitTest',
             'Servlets', 'cPanel', 'MySQL', '.NET', 'Ruby on Rails', 'JSP', 'IdentityServer', 'VoIP', 'AdobeXD', 'CMake', 'Autocad',
             'Spring', 'Django', 'CRM', 'K8S', 'Nginx', 'firmware', 'Google Trend', 'psd', 'CSRF', 'Reactjs', 'Struts', 'WebSocket',
@@ -54,6 +57,11 @@ languages = [' CHAIN ', ' ABAP ', 'Lingo', ' CPL', 'NPL', 'Xtend', ' Flex ', ' I
              ' Inform ', 'Mary', 'Ruby', 'YQL', 'Pike', ' rc ', ' html ', 'Oz', 'Groovy', 'PowerShell', ' CUDA', 'Hack', ' Self ',
              ' CFEngine', 'C#', 'SPS']
 
-salary_patterns = ["lương(?:từ| )+ ((?:\d+|\.)+)", "((?:\d+|\.|-| )+(?:triệu| )+)đồng",
-                   "(?:\d|\.|,)+.000.000", "(?:\d+| |-)+\d+ *(?:triệu|m)", "\$(?:\d+|\.)", "(?:\d+|\.)+ *(?:USD|\$)+",
-                   "(?:\d|\.|,)+,000,000"]
+salary_patterns = [
+    r"lương(?:từ| )+((?:\d+|\.)+)",
+    r"((?:\d+|\.|-| )+(?:triệu| )+)đồng",
+    r"(?:\d+| |-)+\d+ *(?:triệu|m)",
+    r"\$(?:\d+|\.)",
+    r"(?:\d+|\.)+ *(?:USD|\$)+",
+    r"(?:\d+|\.|,)+,000,000"
+]

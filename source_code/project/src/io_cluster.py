@@ -1,4 +1,10 @@
+# coding=utf-8
 import json
+
+import os, sys
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 from pyspark.sql import DataFrame
 
 def save_dataframes_to_hdfs(path,config,data_dfs,target_file_names):
@@ -34,6 +40,7 @@ def save_dataframes_to_elasticsearch(dataframes,indices,es_write_config):
         print("Processing index:",index)
 
         es_write_config['es.resource'] = index
+	#es_write_config['es.nodes.wan.only'] = "true"
 
         rdd_ = dataframe.rdd
         rdd_.map(lambda row: (None, \

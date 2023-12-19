@@ -1,7 +1,11 @@
+# coding=utf-8
 import pyspark
 from pyspark.sql.functions import explode
 import udfs
-
+import os, sys
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 def get_counted_knowledge(extracted_recruit_df):
     '''

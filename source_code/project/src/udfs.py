@@ -4,6 +4,12 @@ from pyspark.sql.types import *
 import re, unicodedata
 import patterns
 import math
+import os, sys
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
+
 @udf(returnType=ArrayType(StringType()))
 def extract_framework_plattform(mo_ta_cong_viec,yeu_cau_ung_vien):
     return [framework for framework in patterns.framework_plattforms if re.search(framework, mo_ta_cong_viec + " " + yeu_cau_ung_vien, re.IGNORECASE)]
@@ -130,14 +136,12 @@ def normalize_salary(quyen_loi):
         vnd : string of salary in vnd unit
         '''
         mill = "000000"
-        norm_vnd = vnd.replace("triệu",mill).replace("Triệu",mill)\
-        .replace("TRIỆU",mill).replace("m",mill).replace("M",mill)\
-        .replace(".","").replace(" ","").replace(",","")
-        try :
+        norm_vnd = vnd.replace("triệu", mill).replace("Triệu", mill).replace("TRIỆU", mill).replace("m", mill).replace("M", mill).replace(".", "").replace(" ", "").replace(",", "")
+        try:
             vnd = math.floor(int(norm_vnd)/1000000)
             return vnd
         except ValueError:
-            print("Value Error while converting ",norm_vnd)
+            print("Value Error while converting ", norm_vnd)
             return None
 
     def vnd_handle(ori_range_list):

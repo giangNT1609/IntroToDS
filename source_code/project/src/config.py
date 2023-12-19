@@ -1,3 +1,5 @@
+# coding=utf-8
+import os, sys
 from pyspark.sql import SparkSession
 
 class Config:
@@ -26,12 +28,13 @@ class Config:
     def initialize_spark_session(self,appName):
         if self.spark_app == None :
             self.spark_app = (SparkSession
-                        .builder.master("spark://master:7077")
+                        .builder.master("spark://spark-master:7077")
                         .appName(appName)
                         .config("spark.jars","elasticsearch-hadoop-7.17.5.jar")
                         .config("spark.driver.extraClassPath","elasticsearch-hadoop-7.17.5.jar")
                         .config("spark.es.nodes",self.elasticsearch_conf["es.nodes"])
                         .config("spark.es.port",self.elasticsearch_conf["es.port"])
-                        .config("spark.es.nodes.wan.only","true")
+                        .config("spark.shuffle.service.enabled", "false")
+        		.config("spark.dynamicAllocation.enabled", "false")
                         .getOrCreate())
         return self.spark_app
